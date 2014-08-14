@@ -1,0 +1,27 @@
+
+        # error response catch-all location
+        location @fallback {
+            return 204;
+            
+            log_by_lua '
+                local log_dict = ngx.shared.log_dict
+                local val = log_dict:incr("request_time-error_count", 1)
+                if not val then log_dict:add("request_time-error_count", 1) end
+           ';
+        }
+        
+        # catch any unmatched url
+        location / {
+            return 400 "invalid url";
+        }
+        
+        # healthcheck url
+        location /health/ {
+            
+            # allow url to be called with javascript from anywhere
+            add_header Access-Control-Allow-Origin *;
+            
+            # say we're healthy
+            return 200 "healthy\n";
+            
+        }

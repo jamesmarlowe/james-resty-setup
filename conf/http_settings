@@ -1,0 +1,32 @@
+
+    # logging
+    log_format spec_format '$time_iso8601 $request_uri $request_time $status $upstream_response_time';
+    access_log logs/access.log spec_format;
+    
+    # settings
+    tcp_nodelay on;
+    merge_slashes off;
+    resolver 8.8.8.8;
+    
+    # time-outs
+    send_timeout 1s;
+    resolver_timeout 1s;
+    client_body_timeout 1s;
+    client_header_timeout 1s;
+    proxy_connect_timeout 1s;
+    proxy_send_timeout 1s;
+    proxy_read_timeout 1s;
+    
+    # shared dictionaries
+    lua_shared_dict log_dict 10m;
+    
+    # rate limiting
+    limit_req_zone  $host  zone=one:100m   rate=24000r/s;
+    
+    # lua import paths for the submodules
+    lua_package_path "${prefix}lua-nginx-logging/?.lua;${prefix}lua-resty-github/lib/resty/?.lua;${prefix}lua-resty-hipchat/lib/resty/?.lua;${prefix}lua-resty-hmac/lib/resty/?.lua;${prefix}lua-resty-s3/lib/resty/?.lua;;";
+    
+    # global namespace or blocking startup behaviour
+    init_by_lua '
+    ';
+    

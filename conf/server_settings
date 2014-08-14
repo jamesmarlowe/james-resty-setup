@@ -1,0 +1,22 @@
+
+        # which port to use
+        listen 80;
+        
+        # always prepare request body for reading
+        lua_need_request_body on;
+        
+        # clear inbound and outbound useless headers
+        more_clear_headers 'Server';
+        more_clear_headers 'Connection';
+        more_clear_input_headers 'Server';
+        more_clear_input_headers 'Connection';
+        
+        # preserve the original host header when proxying
+        proxy_set_header Host $http_host;
+        
+        # how many requests to keep on one connection
+        keepalive_requests 1000;
+        
+        # catch all errors
+        proxy_intercept_errors on;
+        error_page 500 501 502 503 504 =204 @fallback;

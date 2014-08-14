@@ -1,0 +1,13 @@
+
+        # https://github.com/jamesmarlowe/lua-resty-s3
+        include ../lua-resty-s3/conf/*.urls;
+        
+        # https://github.com/jamesmarlowe/lua-resty-hipchat
+        include ../lua-resty-hipchat/conf/*.urls;
+        
+        # https://github.com/jamesmarlowe/lua-resty-github
+        include ../lua-resty-github/conf/*.urls;
+        
+        # https://github.com/Lumate/lua-nginx-logging
+        include ../lua-nginx-logging/conf/*.logging;
+        include ../lua-nginx-logging/conf/*.urls;
