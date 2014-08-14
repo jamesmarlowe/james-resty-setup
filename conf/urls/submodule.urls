@@ -40,8 +40,16 @@
         location /submodule/test/ {
             content_by_lua '
                 local response = ngx.location.capture("/lua-resty-s3/")
+                if response.body then ngx.say(response.body) end
+                
                 local response = ngx.location.capture("/lua-resty-hipchat/")
+                if response.body then ngx.say(response.body) end
+                
                 local response = ngx.location.capture("/lua-resty-github/")
+                if response.body then ngx.say(response.body) end
+                
                 local response = ngx.location.capture("/lua-nginx-logging/")
+                if response.body then ngx.say(response.body) end
+                
             ';
         }
