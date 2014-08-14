@@ -32,7 +32,7 @@
 
         # proxy to lua-nginx-logging test url which is marked internal
         location /lua-nginx-logging/ {
-            rewrite /lua-nginx-logging/ /lua-resty-s3/test/ break;
+            rewrite /lua-nginx-logging/ /lua-resty-logging/health/ break;
         }
         
         
