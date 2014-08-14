@@ -11,7 +11,7 @@ echo "removing nginx logs"
 sudo rm logs/*.log
 
 echo "recompiling lua files"
-for f in $(find rocks -name '*.lua')
+for f in $(find ./lua-* -name '*.lua')
 do
   echo "compiling " $f
   /usr/local/openresty/luajit/bin/luajit-2.1.0-alpha -bg $f ${f/%.lua/.o}
