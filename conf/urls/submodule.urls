@@ -2,12 +2,46 @@
         # https://github.com/jamesmarlowe/lua-resty-s3
         include ../lua-resty-s3/conf/*.urls;
         
+        # proxy to lua-resty-s3 test url which is marked internal
+        location /lua-resty-s3/ {
+            rewrite /lua-resty-s3/ /lua-resty-s3/test/ break;
+        }
+        
+        
         # https://github.com/jamesmarlowe/lua-resty-hipchat
         include ../lua-resty-hipchat/conf/*.urls;
+        
+        # proxy to lua-resty-hipchat test url which is marked internal
+        location /lua-resty-hipchat/ {
+            rewrite /lua-resty-hipchat/ /lua-resty-hipchat/test/ break;
+        }
+        
         
         # https://github.com/jamesmarlowe/lua-resty-github
         include ../lua-resty-github/conf/*.urls;
         
+        # proxy to lua-resty-github test url which is marked internal
+        location /lua-resty-github/ {
+            rewrite /lua-resty-github/ /lua-resty-github/test/ break;
+        }
+        
+        
         # https://github.com/Lumate/lua-nginx-logging
         include ../lua-nginx-logging/conf/*.logging;
         include ../lua-nginx-logging/conf/*.urls;
+
+        # proxy to lua-nginx-logging test url which is marked internal
+        location /lua-nginx-logging/ {
+            rewrite /lua-nginx-logging/ /lua-resty-s3/test/ break;
+        }
+        
+        
+        # call all of the test urls
+        location /submodule/test/ {
+            content_by_lua '
+                local response = ngx.location.capture("/lua-resty-s3/")
+                local response = ngx.location.capture("/lua-resty-hipchat/")
+                local response = ngx.location.capture("/lua-resty-github/")
+                local response = ngx.location.capture("/lua-nginx-logging/")
+            ';
+        }
