@@ -1,0 +1,15 @@
+[submodule "lua-resty-hipchat"]
+	path = lua-resty-hipchat
+	url = git@github.com:jamesmarlowe/lua-resty-hipchat.git
+[submodule "lua-resty-s3"]
+	path = lua-resty-s3
+	url = git@github.com:jamesmarlowe/lua-resty-s3.git
+[submodule "lua-resty-hmac"]
+	path = lua-resty-hmac
+	url = git@github.com:jamesmarlowe/lua-resty-hmac.git
+[submodule "lua-resty-github"]
+	path = lua-resty-github
+	url = git@github.com:jamesmarlowe/lua-resty-github.git
+[submodule "lua-nginx-logging"]
+	path = lua-nginx-logging
+	url = git@github.com:Lumate/lua-nginx-logging.git
